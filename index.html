@@ -313,7 +313,7 @@
 
   <div class="meta">
     <div class="meta-version">
-      <strong>Versione 1.0</strong> · Ultima modifica: 25 aprile 2026
+      <strong>Versione 2.0</strong> · Ultima modifica: 25 aprile 2026
     </div>
     <div class="lang-switch">
       <a href="#" id="btn-it" class="active" onclick="setLang('it'); return false;">🇮🇹 IT</a>
@@ -325,7 +325,7 @@
   <section id="lang-it">
     <header>
       <h1>Privacy Policy — CemBinomio</h1>
-      <p class="subtitle">Ultima modifica: 25 aprile 2026 · Versione 1.0</p>
+      <p class="subtitle">Ultima modifica: 25 aprile 2026 · Versione 2.0</p>
     </header>
 
     <div class="info-box">
@@ -349,26 +349,28 @@
 
     <h2>2. Descrizione dell'applicazione</h2>
     <p>
-      <strong>CemBinomio</strong> è un'app iOS dedicata ai possessori e installatori di centrali di allarme <em>CEM Masternet</em>. Permette di interagire con la propria centrale tramite un dispositivo embedded (Raspberry Pi, ESP32 o simile) che funge da ponte fra l'app e il tastierino fisico della centrale, simulando la pressione dei tasti e leggendo il display LCD.
+      <strong>CemBinomio</strong> è un'app dedicata a chi possiede una centrale di allarme <em>CEM Masternet</em>. Permette di gestire la propria centrale dal proprio iPhone o iPad, in modo simile a come si farebbe usando il tastierino fisico installato in casa o in ufficio.
     </p>
     <p>
-      L'utilizzo dell'app è esclusivamente <strong>B2B</strong> (professionale): è destinata agli utenti che hanno installato un sistema di allarme CEM e dispongono di un dispositivo di interfacciamento configurato.
+      L'app si rivolge a utenti che hanno già installato un sistema di allarme CEM presso la propria abitazione, attività commerciale o ufficio.
     </p>
 
     <h2>3. Dati raccolti dall'app</h2>
 
     <h3>3.1 Dati inseriti manualmente dall'utente</h3>
     <ul>
-      <li><strong>Nome utente</strong> (es. "<code>mario</code>" o "<code>@mario</code>"): identifica l'account dell'utente sulla centrale e la modalità (Master o Advanced).</li>
-      <li><strong>Indirizzo del server / dispositivo</strong> (IP o hostname): l'indirizzo del dispositivo embedded a cui collegarsi.</li>
-      <li><strong>Codice di registrazione</strong> (15 caratteri alfabetici): chiave di abbinamento dispositivo, fornita dal proprio installatore CEM.</li>
+      <li><strong>Nome utente</strong>: il nome che l'utente sceglie per accedere alla propria centrale.</li>
+      <li><strong>Indirizzo della centrale</strong>: necessario per identificare e collegarsi al proprio impianto.</li>
+      <li><strong>Codice di registrazione</strong>: una chiave di sicurezza fornita dall'installatore CEM al momento dell'installazione, che permette all'app di abbinarsi alla specifica centrale dell'utente.</li>
     </ul>
 
     <h3>3.2 Dove vengono memorizzati questi dati</h3>
-    <ul>
-      <li><strong>Nome utente</strong> e <strong>indirizzo server</strong>: salvati in chiaro in file locali nella sandbox dell'app (cartella Documents), accessibili solo all'app stessa secondo le regole di sandboxing iOS.</li>
-      <li><strong>Codice di registrazione</strong>: salvato in modo sicuro nel <strong>iOS Keychain</strong>, cifrato dal sistema operativo.</li>
-    </ul>
+    <p>
+      Tutti i dati inseriti nell'app vengono salvati <strong>esclusivamente sul dispositivo dell'utente</strong> (iPhone o iPad), in uno spazio riservato all'app a cui nessun'altra app può accedere. Il codice di registrazione, in particolare, viene custodito nelle aree di sicurezza del sistema iOS, dove è protetto dalla cifratura del dispositivo.
+    </p>
+    <p>
+      <strong>Nessuno di questi dati viene condiviso con CEM Srl o con terze parti.</strong>
+    </p>
 
     <h3>3.3 Dati NON raccolti</h3>
     <p>L'app <strong>NON</strong> raccoglie nessuno dei seguenti dati:</p>
@@ -383,53 +385,48 @@
       <li>Dati anagrafici (nome, cognome, indirizzo, telefono)</li>
     </ul>
 
-    <h2>4. Trasferimento dei dati a server esterni</h2>
+    <h2>4. Comunicazioni di rete dell'app</h2>
 
-    <h3>4.1 Server di discovery CEM</h3>
+    <h3>4.1 Localizzazione della centrale</h3>
     <p>
-      Al momento della connessione, l'app effettua una richiesta HTTP al server CEM (<code>www.cemsicurezza.it/cemdns/isrc.php</code>) con i seguenti parametri:
+      Quando l'utente avvia una connessione, l'app contatta brevemente i server di CEM Srl per ricevere l'indirizzo della propria centrale. In questa richiesta vengono trasmessi solo il <strong>nome utente</strong> e il <strong>codice di registrazione</strong> inseriti dall'utente; non vengono inviati né dati anagrafici né identificatori del dispositivo dell'utente.
     </p>
-    <ul>
-      <li>Il <strong>nome utente</strong> inserito dall'utente</li>
-      <li>Il <strong>codice di registrazione</strong> del dispositivo</li>
-    </ul>
     <p>
-      Il server CEM utilizza queste informazioni unicamente per restituire all'app l'indirizzo IP del dispositivo embedded associato all'utente. <strong>Non vengono trasmessi né IP del telefono, né identificatori univoci, né dati personali aggiuntivi.</strong> Le richieste possono essere registrate temporaneamente nei log del server per finalità tecniche e di sicurezza, e vengono eliminate periodicamente.
+      Le richieste possono essere registrate temporaneamente nei log dei server CEM per finalità tecniche e di sicurezza, e vengono eliminate periodicamente.
     </p>
 
     <h3>4.2 Comunicazione con la centrale di allarme</h3>
     <p>
-      Tutta la comunicazione operativa avviene <strong>direttamente</strong> fra l'app e il dispositivo embedded sulla rete locale dell'utente (o tramite VPN se l'utente l'ha configurata). I dati scambiati sono:
+      Tutta la gestione operativa (pressione dei tasti, lettura del display) avviene <strong>direttamente</strong> tra l'app e la centrale dell'utente, sulla rete WiFi della propria abitazione o azienda (oppure tramite VPN, se configurata).
     </p>
-    <ul>
-      <li>Pressioni dei tasti virtuali (cifrate tramite XOR a 32 bit)</li>
-      <li>Stato del display LCD e dei LED letti dalla centrale</li>
-    </ul>
     <p>
-      <strong>Nessun dato passa per server CEM o terze parti durante l'uso normale dell'app.</strong>
+      I comandi inviati alla centrale sono codificati per impedire che vengano interpretati da terzi sulla stessa rete.
+    </p>
+    <p>
+      <strong>Nessun dato relativo all'utilizzo quotidiano dell'app passa per i server di CEM Srl o di terze parti.</strong>
     </p>
 
     <div class="highlight">
-      <strong>Importante — Comunicazione HTTP non cifrata:</strong> i dispositivi embedded compatibili con la centrale CEM Masternet (Raspberry Pi, ESP32) non supportano TLS/HTTPS per limiti hardware. Per questo motivo l'app utilizza HTTP non cifrato sulla rete locale (con l'eccezione configurata <code>NSAllowsArbitraryLoads</code>). Si consiglia di utilizzare l'app solo su reti WiFi sicure di propria fiducia, oppure tramite VPN.
+      <strong>Sicurezza della rete domestica:</strong> consigliamo di utilizzare l'app solo su reti WiFi protette da password che si conoscono e di cui ci si fida (la propria rete di casa, dell'ufficio o un sistema VPN dedicato). Evitare di usare l'app su reti pubbliche aperte (bar, hotel, aeroporti).
     </div>
 
     <h2>5. Servizi di terze parti</h2>
     <p>L'app <strong>NON</strong> integra alcun servizio di terze parti per:</p>
     <ul>
-      <li>Analytics (Google Analytics, Firebase Analytics, Mixpanel, ecc.)</li>
-      <li>Pubblicità (AdMob, Facebook Audience Network, ecc.)</li>
-      <li>Crash reporting di terze parti (Crashlytics, Sentry, ecc.)</li>
-      <li>Push notification</li>
-      <li>Login social</li>
+      <li>Analisi dell'utilizzo o statistiche (Google Analytics o simili)</li>
+      <li>Pubblicità</li>
+      <li>Profilazione</li>
+      <li>Notifiche push</li>
+      <li>Accesso tramite social network</li>
     </ul>
-    <p>L'app utilizza esclusivamente le API standard di Apple iOS (<code>URLSession</code>, <code>Keychain</code>, <code>AVFoundation</code>) per le proprie funzionalità.</p>
+    <p>L'app utilizza esclusivamente le funzionalità standard messe a disposizione dal sistema operativo iOS di Apple.</p>
 
     <h2>6. Cookie</h2>
     <p>L'app è un'applicazione nativa iOS e <strong>non utilizza cookie</strong>.</p>
 
     <h2>7. Conservazione dei dati</h2>
     <ul>
-      <li><strong>Sul dispositivo dell'utente</strong>: i dati vengono mantenuti finché l'utente non li elimina manualmente dall'app oppure non disinstalla l'applicazione. La disinstallazione comporta la rimozione di tutti i dati locali, incluso il codice di registrazione nel Keychain.</li>
+      <li><strong>Sul dispositivo dell'utente</strong>: i dati vengono mantenuti finché l'utente non li elimina manualmente dall'app oppure non disinstalla l'applicazione. La disinstallazione comporta la rimozione di tutti i dati locali, incluso il codice di registrazione.</li>
       <li><strong>Sul server CEM</strong> (limitatamente alle richieste di discovery): i log tecnici vengono conservati per un periodo limitato (generalmente fino a 30 giorni) per finalità di sicurezza e diagnosi tecnica, dopodiché vengono eliminati o anonimizzati.</li>
     </ul>
 
@@ -460,10 +457,10 @@
     <h2>11. Sicurezza dei dati</h2>
     <p>Adottiamo misure tecniche e organizzative per proteggere i dati:</p>
     <ul>
-      <li>Cifratura del codice di registrazione tramite iOS Keychain (AES-256, gestita dal sistema operativo)</li>
-      <li>Sandboxing dell'app secondo le regole di sicurezza iOS</li>
-      <li>Cifratura XOR dei comandi inviati al dispositivo embedded</li>
-      <li>Aggiornamenti regolari dell'app tramite App Store</li>
+      <li>Il codice di registrazione viene custodito nelle aree di sicurezza protette del sistema iOS</li>
+      <li>Tutti i dati dell'app sono accessibili esclusivamente all'app stessa e non sono visibili da altre applicazioni</li>
+      <li>I comandi inviati alla centrale sono codificati per essere protetti da intercettazioni sulla rete locale</li>
+      <li>L'app riceve aggiornamenti regolari tramite App Store di Apple per correzioni di sicurezza</li>
     </ul>
 
     <h2>12. Modifiche alla Privacy Policy</h2>
@@ -484,7 +481,7 @@
     </div>
 
     <footer class="doc-footer">
-      Versione 1.0 · Ultima modifica: 25 aprile 2026
+      Versione 2.0 · Ultima modifica: 25 aprile 2026
     </footer>
   </section>
 
@@ -492,7 +489,7 @@
   <section id="lang-en" hidden>
     <header>
       <h1>Privacy Policy — CemBinomio</h1>
-      <p class="subtitle">Last updated: April 25, 2026 · Version 1.0</p>
+      <p class="subtitle">Last updated: April 25, 2026 · Version 2.0</p>
     </header>
 
     <div class="info-box">
@@ -516,26 +513,28 @@
 
     <h2>2. Description of the Application</h2>
     <p>
-      <strong>CemBinomio</strong> is an iOS app dedicated to owners and installers of <em>CEM Masternet</em> alarm panels. It allows users to interact with their alarm panel through an embedded device (Raspberry Pi, ESP32, or similar) that acts as a bridge between the app and the alarm panel keypad, simulating key presses and reading the LCD display.
+      <strong>CemBinomio</strong> is an app for owners of <em>CEM Masternet</em> alarm panels. It allows users to manage their alarm panel from their iPhone or iPad, similar to how they would use the physical keypad installed at home or in the office.
     </p>
     <p>
-      The app is for <strong>B2B</strong> (professional) use only: it is intended for users who have a CEM alarm system installed and a configured bridge device.
+      The app is intended for users who have already installed a CEM alarm system in their home, business, or office.
     </p>
 
     <h2>3. Data Collected by the App</h2>
 
     <h3>3.1 Data manually entered by the user</h3>
     <ul>
-      <li><strong>Username</strong> (e.g. "<code>john</code>" or "<code>@john</code>"): identifies the user account on the alarm panel and the mode (Master or Advanced).</li>
-      <li><strong>Server / device address</strong> (IP or hostname): the address of the embedded device to connect to.</li>
-      <li><strong>Registration code</strong> (15 alphabetic characters): device pairing key, provided by the CEM installer.</li>
+      <li><strong>Username</strong>: the name the user chooses to access their alarm panel.</li>
+      <li><strong>Panel address</strong>: needed to identify and connect to the user's own system.</li>
+      <li><strong>Registration code</strong>: a security key provided by the CEM installer at the time of installation, allowing the app to pair with the user's specific alarm panel.</li>
     </ul>
 
     <h3>3.2 Where this data is stored</h3>
-    <ul>
-      <li><strong>Username</strong> and <strong>server address</strong>: stored in plaintext local files within the app sandbox (Documents folder), accessible only to the app itself per iOS sandboxing rules.</li>
-      <li><strong>Registration code</strong>: stored securely in the <strong>iOS Keychain</strong>, encrypted by the operating system.</li>
-    </ul>
+    <p>
+      All data entered in the app is stored <strong>exclusively on the user's device</strong> (iPhone or iPad), in a space reserved for the app that no other app can access. The registration code in particular is stored in the secure areas of the iOS system, where it is protected by device encryption.
+    </p>
+    <p>
+      <strong>None of this data is shared with CEM Srl or third parties.</strong>
+    </p>
 
     <h3>3.3 Data NOT collected</h3>
     <p>The app does <strong>NOT</strong> collect any of the following:</p>
@@ -550,53 +549,48 @@
       <li>Personal information (name, surname, address, phone)</li>
     </ul>
 
-    <h2>4. Data Transfer to External Servers</h2>
+    <h2>4. App Network Communications</h2>
 
-    <h3>4.1 CEM Discovery Server</h3>
+    <h3>4.1 Locating the alarm panel</h3>
     <p>
-      Upon connection, the app makes an HTTP request to the CEM server (<code>www.cemsicurezza.it/cemdns/isrc.php</code>) with the following parameters:
+      When the user starts a connection, the app briefly contacts CEM Srl servers to receive the address of the user's alarm panel. Only the <strong>username</strong> and the <strong>registration code</strong> entered by the user are transmitted in this request; no personal information or device identifiers are sent.
     </p>
-    <ul>
-      <li>The <strong>username</strong> entered by the user</li>
-      <li>The <strong>device registration code</strong></li>
-    </ul>
     <p>
-      The CEM server uses this information solely to return the IP address of the embedded device associated with the user. <strong>No phone IP, no unique identifiers, and no additional personal data are transmitted.</strong> Requests may be temporarily logged on the server for technical and security purposes, and are deleted periodically.
+      Requests may be temporarily logged on CEM servers for technical and security purposes, and are deleted periodically.
     </p>
 
-    <h3>4.2 Communication with the Alarm Panel</h3>
+    <h3>4.2 Communication with the alarm panel</h3>
     <p>
-      All operational communication takes place <strong>directly</strong> between the app and the embedded device on the user's local network (or via VPN if configured). The data exchanged is:
+      All operational management (key presses, display readings) takes place <strong>directly</strong> between the app and the user's alarm panel, over the WiFi network of the user's home or business (or via VPN, if configured).
     </p>
-    <ul>
-      <li>Virtual key presses (encrypted via 32-bit XOR)</li>
-      <li>LCD display and LED state read from the alarm panel</li>
-    </ul>
     <p>
-      <strong>No data passes through CEM servers or third parties during normal app use.</strong>
+      Commands sent to the alarm panel are encoded to prevent them from being intercepted by third parties on the same network.
+    </p>
+    <p>
+      <strong>No data related to daily app use passes through CEM Srl servers or third parties.</strong>
     </p>
 
     <div class="highlight">
-      <strong>Important — Unencrypted HTTP communication:</strong> embedded devices compatible with the CEM Masternet panel (Raspberry Pi, ESP32) do not support TLS/HTTPS due to hardware limitations. For this reason, the app uses unencrypted HTTP on the local network (with the configured <code>NSAllowsArbitraryLoads</code> exception). We recommend using the app only on trusted secure WiFi networks or via VPN.
+      <strong>Home network security:</strong> we recommend using the app only on password-protected WiFi networks that you know and trust (your home, your office, or a dedicated VPN). Avoid using the app on open public networks (cafes, hotels, airports).
     </div>
 
     <h2>5. Third-Party Services</h2>
     <p>The app does <strong>NOT</strong> integrate any third-party service for:</p>
     <ul>
-      <li>Analytics (Google Analytics, Firebase Analytics, Mixpanel, etc.)</li>
-      <li>Advertising (AdMob, Facebook Audience Network, etc.)</li>
-      <li>Third-party crash reporting (Crashlytics, Sentry, etc.)</li>
+      <li>Usage analysis or statistics (Google Analytics or similar)</li>
+      <li>Advertising</li>
+      <li>Profiling</li>
       <li>Push notifications</li>
-      <li>Social login</li>
+      <li>Social network login</li>
     </ul>
-    <p>The app uses only standard Apple iOS APIs (<code>URLSession</code>, <code>Keychain</code>, <code>AVFoundation</code>) for its functionality.</p>
+    <p>The app uses only the standard features provided by Apple's iOS operating system.</p>
 
     <h2>6. Cookies</h2>
     <p>The app is a native iOS application and <strong>does not use cookies</strong>.</p>
 
     <h2>7. Data Retention</h2>
     <ul>
-      <li><strong>On the user's device</strong>: data is retained until the user manually removes it from the app or uninstalls the application. Uninstalling removes all local data, including the registration code in the Keychain.</li>
+      <li><strong>On the user's device</strong>: data is retained until the user manually removes it from the app or uninstalls the application. Uninstalling removes all local data, including the registration code.</li>
       <li><strong>On the CEM server</strong> (limited to discovery requests): technical logs are retained for a limited period (generally up to 30 days) for security and technical diagnostic purposes, after which they are deleted or anonymized.</li>
     </ul>
 
@@ -627,10 +621,10 @@
     <h2>11. Data Security</h2>
     <p>We adopt technical and organizational measures to protect data:</p>
     <ul>
-      <li>Encryption of the registration code via iOS Keychain (AES-256, managed by the operating system)</li>
-      <li>App sandboxing per iOS security rules</li>
-      <li>XOR encryption of commands sent to the embedded device</li>
-      <li>Regular app updates via the App Store</li>
+      <li>The registration code is stored in the protected secure areas of the iOS system</li>
+      <li>All app data is accessible exclusively to the app itself and is not visible to other applications</li>
+      <li>Commands sent to the alarm panel are encoded to be protected from interception on the local network</li>
+      <li>The app receives regular updates via Apple's App Store for security fixes</li>
     </ul>
 
     <h2>12. Changes to this Privacy Policy</h2>
@@ -651,7 +645,7 @@
     </div>
 
     <footer class="doc-footer">
-      Version 1.0 · Last updated: April 25, 2026
+      Version 2.0 · Last updated: April 25, 2026
     </footer>
   </section>
 
